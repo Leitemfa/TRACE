@@ -1,0 +1,50 @@
+---
+title: "R Notebook"
+output: html_notebook
+editor_options: 
+  chunk_output_type: console
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to run the code developed in the paper [Infinite joint species distribution models.](https://arxiv.org/abs/2402.13384).
+
+The functions in TRACEh.cpp are written in C++ using the Rcpp and RcppArmadillo libraries, which are designed to be called from R. Here’s how you can run them:
+
+### 1. From R (Recommended)
+
+These functions are meant to be used inside R as part of an R package or R script. You can call the [[Rcpp::export]]-tagged functions directly from R after sourcing or building the package.
+
+#### Steps:
+
+**a. Install Rcpp and RcppArmadillo in R (if not already installed):**
+
+```{r}
+install.packages("Rcpp")
+install.packages("RcppArmadillo")
+```
+
+
+**b. Source the C++ file in R (if not building a package):**
+
+```{r}
+library(Rcpp)
+sourceCpp("TRACEh.cpp")
+```
+
+This will compile the C++ code and export the functions to your R session.
+
+**c. Call the exported functions from R:**
+For example:
+
+```{r}
+# Example call (use actual data for Y and X)
+result <- MVP_IBPh(Y, X, eta0_rho, nu0_rho, gamma0_rho, lambda0_sq_rho, a_alpha, b_alpha, prior_var, max_it, epsilon, m, nmcmc, burnin, nmcmc_a, burnin_a, eps_MH, truncP)
+```
+
+
+### 2. As Part of an R Package
+
+If the repo provides an R package interface (look for an R/ directory or DESCRIPTION file), you should install the package following its README instructions, and then call the functions from R as documented.
+
+### 3. Not Standalone C++ Code
+
+You cannot run these functions directly from a C++ compiler or command line unless you set up an interface with Rcpp; they depend on Rcpp and RcppArmadillo, and some functions call R internals (e.g., R::qnorm).
