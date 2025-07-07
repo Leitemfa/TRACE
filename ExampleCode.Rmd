@@ -13,6 +13,8 @@ The functions in TRACEh.cpp are written in C++ using the Rcpp and RcppArmadillo 
 
 These functions are meant to be used inside R as part of an R package or R script. You can call the [[Rcpp::export]]-tagged functions directly from R after sourcing or building the package.
 
+Do not forget to update your R console and download the latest version of Rtools prior to running this script
+
 #### Steps:
 
 **a. Install Rcpp and RcppArmadillo in R (if not already installed):**
@@ -21,6 +23,7 @@ These functions are meant to be used inside R as part of an R package or R scrip
 install.packages("Rcpp")
 install.packages("RcppArmadillo")
 ```
+
 
 
 **b. Source the C++ file in R (if not building a package):**
